@@ -19,6 +19,9 @@
 		<button>
 			<a href="/">홈 home</a>
 		</button>
+		<button onclick="location.href='/makeData'">
+			테스트 데이터 생성
+		</button>
 	</h1>
 
 	<button>

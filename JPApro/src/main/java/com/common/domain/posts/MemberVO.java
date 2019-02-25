@@ -29,11 +29,7 @@ public class MemberVO {
 	private String password;
 
 	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Role role;
+	private String role;
 	
-	public enum Role {
-		ROLE_ADMIN /* 난 그냥 일단 하나만 만들어서 할꺼임. 공부니까 */
-	}
 
 }

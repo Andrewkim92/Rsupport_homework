@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.common.domain.posts.BoardRepository;
 import com.common.domain.posts.BoardVO2;
+import com.common.domain.posts.MemberVO;
+import com.common.domain.posts.MemberRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -21,6 +23,8 @@ import lombok.AllArgsConstructor;
 public class WebController {
 
 	private BoardRepository boardVORepo;
+	
+	private MemberRepository memberVORepo;
 	
 	@GetMapping("/")
 	public String main(Model model,Pageable pageable) {
@@ -48,6 +52,21 @@ public class WebController {
 		model.addAttribute("hasNext", voList.hasNext());
 		model.addAttribute("hasPrevious", voList.hasPrevious());
 		return "home";
+	}
+	
+
+	@GetMapping("/login")
+	public String login(Model model) {
+		
+//		MemberVO vo = new MemberVO();
+//		vo.setEmail("test@email");
+//		vo.setPassword("1234");
+//		vo.setRole("ROLE_ADMIN");
+//		
+//		memberVORepo.save(vo);
+		
+		
+		return "login";
 	}
 	
 	@GetMapping("/makeData")

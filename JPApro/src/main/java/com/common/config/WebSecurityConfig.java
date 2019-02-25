@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.common.service.CustomUserDetailsService;
+
 @EnableWebSecurity /* WebConfig 컴포넌트 등록 */
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -19,6 +21,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
+
+	@Autowired
+	CustomUserDetailsService customUserDetailsService;
 
 	/* Password Encoder 등록 */
 	@Bean
@@ -36,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**");
+		web.ignoring().antMatchers("/");
 	}
 
 	/* 각종 시큐어 패턴등록 */
@@ -43,14 +49,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests() /* 인증 요청 선언?????? */
 
-				.antMatchers("/access").hasRole("ADMIN") /* /access 패턴은 ADMIN 유저만 접근 */
-				.and()
+				.antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/**").permitAll().and().formLogin()
+				.loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/").failureUrl("/login").and()
+				.logout();
+	}
 
-				.formLogin() /* 로그인 폼 나오도록 */
-				.loginPage("/login") /* 내가 만든 로그인 페이지 */
-				.usernameParameter("email") /* username 을 대체할 아이디 param default username */
-				.passwordParameter("password") /* password 를 대체할 패스워드 param default password */
-				.permitAll() /* 모두 오픈 ( 반대는 denyAll() ) */
-				.and().logout().permitAll().logoutSuccessUrl("/"); /* 로그아웃 성공시 리다이렉트 url */
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 }
