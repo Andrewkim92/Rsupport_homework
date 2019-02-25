@@ -37,11 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 	}
 
-	/* Security 제외 패턴 */
+	/* Security 제외 패턴 */	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**");
-		web.ignoring().antMatchers("/");
+		web.ignoring().antMatchers("/*");
 	}
 
 	/* 각종 시큐어 패턴등록 */

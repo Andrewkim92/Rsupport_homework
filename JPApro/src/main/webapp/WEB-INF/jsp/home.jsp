@@ -11,7 +11,6 @@
 </head>
 
 <script>
-	var boardCnt = 0;
 	
 </script>
 <body>
