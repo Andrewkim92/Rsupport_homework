@@ -14,13 +14,6 @@
 <script>
 	var boardCnt = 0;
 	
-	if(${fn:length(voList.content) }>0){
-		boardCnt  = ${fn:length(voList.content) };
-		
-	}else{
-		
-	}
-	
 </script>
 <body>
 	<h1>
