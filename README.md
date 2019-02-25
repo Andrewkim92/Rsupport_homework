@@ -10,7 +10,7 @@ Rsupport 과제 저장소 입니다.
 -Hibernate <br>
 -JSP <br>
 
-구현 기능 
+구현 기능 <br>
 A. 텍스트로된 공지 추가 기능 <br>
 B. 공지 수정/삭제 기능 <br>
 C. 공지 목록 조회 기능 <br>
